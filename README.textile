@@ -30,3 +30,11 @@ h3. Running
 <pre><code>./inverted-index.rb start</code></pre>
 
 Assuming you have your hadoop environment all set up, this will fire up a task with the appropriate map and reduce functions.
+
+h3. Testing/Simulating
+
+<pre><code>./inverted-index.rb simulate test-file.txt</code></pre>
+
+Which executes a poor-man's local MR:
+
+<pre><code>cat test-file.txt | ./inverted-index.rb map | sort | ./inverted-index.rb reduce</code></pre>

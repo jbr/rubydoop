@@ -10,19 +10,19 @@ _Desired output:_ Each word, stripped of punctuation, paired with a comma-delimi
 *inverted-index.rb*
 
 <pre><code>
-  #!/usr/bin/ruby
-  require "rubydoop"
+#!/usr/bin/ruby
+require "rubydoop"
 
-  map do |location, line|
-    line.split(/\s+/).each do |word|
-      next unless word.strip.length > 0
-      puts [word.strip.downcase.gsub(/^\(|[^a-zA-Z]$/, ''), location].join("\t")
-    end
+map do |location, line|
+  line.split(/\s+/).each do |word|
+    next unless word.strip.length > 0
+    emit word.strip.downcase.gsub(/^\(|[^a-zA-Z]$/, ''), location
   end
+end
 
-  reduce do |key, values|
-    puts [key, values.join(",")].join("\t")
-  end
+reduce do |key, values|
+  emit key, values.join(",")
+end
 </code></pre>
 
 h3. Running

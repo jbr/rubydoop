@@ -6,6 +6,10 @@ def reduce(&proc)
   @reduce = proc
 end
 
+def emit(key, value)
+  puts [key, value].join("\t")
+end
+
 at_exit do
   case ARGV.first
   when 'start'

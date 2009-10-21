@@ -44,6 +44,9 @@ at_exit do
         values << thisvalue
       end
     end
+  when 'simulate'
+    raise unless File.exists?(ARGV.last)
+    exec "cat #{ARGV.last} | #{$0} map | sort | #{$0} reduce"
   else
     STDERR.puts <<-EOM
 Please run "#{$0} COMMAND", where COMMAND is one of the following:

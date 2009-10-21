@@ -1,0 +1,31 @@
+h1. Rubydoop --- Simple Ruby Sugar for Hadoop Streaming
+
+h2. Example --- Inverted Index
+
+_Input:_ @file@linenum\tline@
+(where line may include tabs or spaces, and likely has many words)
+
+_Desired output:_ Each word, stripped of punctuation, paired with a comma-delimited list of file@linenum locations for quick lookup.
+
+*inverted-index.rb*
+<pre><code>
+  #!/usr/bin/ruby
+  require "rubydoop"
+
+  map do |location, line|
+    line.split(/\s+/).each do |word|
+      next unless word.strip.length > 0
+      puts [word.strip.downcase.gsub(/^\(|[^a-zA-Z]$/, ''), location].join("\t")
+    end
+  end
+
+  reduce do |key, values|
+    puts [key, values.join(",")].join("\t")
+  end
+</code></pre>
+
+h3. Running
+
+<pre><code>./inverted-index.rb start</code></pre>
+
+Assuming you have your hadoop environment all set up, this will fire up a task with the appropriate map and reduce functions.

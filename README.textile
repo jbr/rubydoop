@@ -2,7 +2,7 @@ h1. Rubydoop --- Simple Ruby Sugar for Hadoop Streaming
 
 h2. Example --- Inverted Index
 
-_Input:_ @file@linenum\tline@
+_Input:_ <code>file@linenum\tline</code>
 (where line may include tabs or spaces, and likely has many words)
 
 _Desired output:_ Each word, stripped of punctuation, paired with a comma-delimited list of file@linenum locations for quick lookup.

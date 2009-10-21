@@ -8,7 +8,7 @@ _Input:_ @file@linenum\tline@
 _Desired output:_ Each word, stripped of punctuation, paired with a comma-delimited list of file@linenum locations for quick lookup.
 
 *inverted-index.rb*
-<code><pre>
+<pre><code>
   #!/usr/bin/ruby
   require "rubydoop"
 
@@ -22,7 +22,7 @@ _Desired output:_ Each word, stripped of punctuation, paired with a comma-delimi
   reduce do |key, values|
     puts [key, values.join(",")].join("\t")
   end
-</pre></code>
+</code></pre>
 
 h3. Running
 

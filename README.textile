@@ -13,6 +13,8 @@ _Desired output:_ Each word, stripped of punctuation, paired with a comma-delimi
 #!/usr/bin/ruby
 require "rubydoop"
 
+HADOOP_HOME = "/usr/local/hadoop"
+
 map do |location, line|
   line.split(/\s+/).each do |word|
     next unless word.strip.length > 0

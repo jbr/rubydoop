@@ -11,11 +11,12 @@ def emit(key, value)
 end
 
 at_exit do
+  HADOOP_HOME ||= ENV['HADOOP_HOME'] || '/usr/local/hadoop'
   case ARGV.first
   when 'start'
     cmd = <<-EOC
       hadoop fs -rmr output
-      hadoop jar /usr/local/hadoop/contrib/streaming/hadoop-*-streaming.jar\\
+      hadoop jar #{HADOOP_HOME}/contrib/streaming/hadoop-*-streaming.jar\\
         -inputformat org.apache.hadoop.mapred.KeyValueTextInputFormat\\
         -output output -input input\\
         -file #{File.expand_path __FILE__} \\
